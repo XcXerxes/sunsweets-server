@@ -7,7 +7,7 @@
   "author": "xcxerxes <xiac@jieshuibao.com>",
   "license": "MIT",
   "scripts": {
-    "start": "supervisor node app"
+    "start": "supervisor app.js"
   },
   "dependencies": {
     "body-parser": "^1.17.2",

@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataType) =>{
-  return sequelize.define('sweetCategory',{
+  return sequelize.define('restaurant',{
     id:{
       type: DataType.STRING(64),
       primaryKey: true

@@ -14,7 +14,7 @@
  * @method getItem
  */
 
-exports.getItem = (req, res, models) => {
+exports.item = (req, res, models) => {
   const { id } = req.query
   if (!id) {
     res.json({
@@ -44,7 +44,7 @@ exports.getItem = (req, res, models) => {
  * @params  sort   排序
  */
 
-exports.getList = (req, res, models, sort) => {
+exports.list = (req, res, models, sort) => {
   const sortName = (sort && sort.sortName) ||'id'
   const sortType = (sort && sort.sortName) ||'asc'
   let {limit,currentPage} = req.query
