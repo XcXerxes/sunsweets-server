@@ -11,6 +11,10 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(cookieParser())
 app.use(express.static(path.json(__dirname,'static')))
 
+app.get('/user',(req,res) => {
+    console.log(req)
+})
+
 const port = process.env.POST || 4000
 app.listen(port,err=>{
     if(err){

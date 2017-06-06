@@ -27,3 +27,22 @@ db.sequelize = sequelize
 db.Sequelize = Sequelize
 
 module.exports = db
+
+/*sequelize.define('User',{
+        username:{
+            type: Sequelize.STRING(64),
+            primaryKey: true
+        },
+        password: Sequelize.STRING(64),
+    },{
+        timestamps:false
+    }).findOne({
+        where:{
+            username:'admin',
+            password:'admin'
+        }
+    }).then(p =>{
+        console.log(JSON.stringify(p))
+    }).catch(err=>{
+        console.log(err)
+    })*/

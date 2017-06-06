@@ -1,5 +1,6 @@
+// mysql config
 module.exports = {
-    database: 'sunSweets',
+    database: 'sun_sweets',
     username:'root',
     password:'1234',
     host: '127.0.0.1',

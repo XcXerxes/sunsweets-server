@@ -6,13 +6,20 @@
   "repository": "https://git.oschina.net/xcxerxes/sunsweets-server.git",
   "author": "xcxerxes <xiac@jieshuibao.com>",
   "license": "MIT",
+  "scripts": {
+    "start": "supervisor node app"
+  },
   "dependencies": {
     "body-parser": "^1.17.2",
     "cookie-parser": "^1.4.3",
     "express": "^4.15.3",
+    "jsonwebtoken": "^7.4.1",
     "morgan": "^1.8.2",
     "mysql": "^2.13.0",
     "sequelize": "^3.30.4",
     "serve-favicon": "^2.4.3"
+  },
+  "devDependencies": {
+    "supervisor": "^0.12.0"
   }
 }
