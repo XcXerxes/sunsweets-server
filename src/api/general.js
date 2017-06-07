@@ -44,12 +44,13 @@ exports.item = (req, res, models) => {
  * @params  sort   排序
  */
 
-exports.list = (req, res, models, sort) => {
-  const sortName = (sort && sort.sortName) ||'id'
-  const sortType = (sort && sort.sortName) ||'asc'
-  let {limit,currentPage} = req.query
+exports.list = (req, res, models) => {
+  let {limit,currentPage,sort} = req.query
+  const sortName = (sort && sort.split('-')[0]) ||'id'
+  const sortType = (sort && sort.split('-')[1]) ||'asc'
   limit = parseInt(limit,10) || 1
   currentPage = parseInt(currentPage,10) || 10
+  
   const offset = (currentPage - 1) * limit
   models.findAndCountAll({
     offset,

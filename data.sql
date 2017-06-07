@@ -13,9 +13,10 @@ CREATE TABLE IF NOT EXISTS `carousels`(
    PRIMARY KEY ( `id` )
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `restaurants`(
+CREATE TABLE IF NOT EXISTS `shop`(
    `id` VARCHAR(64) NOT NULL,
    `name` VARCHAR(100) NOT NULL,
+   `sweet_id` VARCHAR(100) NOT NULL,
    `level` INTEGER NOT NULL,
    `area` VARCHAR(100) NOT NULL,
    `imgGroup` VARCHAR(100) NOT NULL,
@@ -26,6 +27,7 @@ CREATE TABLE IF NOT EXISTS `restaurants`(
 CREATE TABLE IF NOT EXISTS `sweet_categorys`(
    `id` VARCHAR(64) NOT NULL,
    `title` VARCHAR(100) NOT NULL,
+   `sweet_order` INTEGER NOT NULL,
    PRIMARY KEY ( `id` )
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken')
 const models = require('../models')
 const secret = require('../config/secret')
+const assertError = require('../utils/asserts')
 
 /**
  * 管理员登录
@@ -11,10 +12,7 @@ exports.login = (req, res) => {
   let { username, password } = req.body
   console.log(req.body)
   if (username === '' || password === '') {
-    return res.json({
-      code: -200,
-      message: '请输入用户名和密码'
-    })
+    return res.json(assertError('请输入用户名和密码'))
   }
   models.User.findOne({
     where: {
@@ -32,15 +30,9 @@ exports.login = (req, res) => {
         data: token
       })
     }
-    return res.json({
-      code: -200,
-      message: '用户名或者密码错误'
-    })
+    return res.json(assertError('用户名或密码错误'))
   }).catch(err => {
-    res.json({
-      code: -200,
-      message: err.toString()
-    })
+    res.json(assertError(err.toString()))
   })
 
 }
