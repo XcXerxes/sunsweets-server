@@ -7,7 +7,7 @@ const assertError = require('../utils/asserts')
 
 /**
  * 门店列表
- * 
+ * @methods getList
  */
 
 exports.getList = (req, res) => {

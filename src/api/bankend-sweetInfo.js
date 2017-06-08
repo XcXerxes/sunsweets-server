@@ -9,13 +9,25 @@ const assertError = require('../utils/asserts')
  * @methods create
  */
 
-exports.create = (req, res) =>{
-  const {title, thumb, caption, desc, category_id, area, diff, shop} = req.body
-  if( !title || !thumb || !caption || !desc || !category_id || !area || !diff || !shop ||(shop && !Array.isArray(shop))){
+exports.create = (req, res) => {
+  const { title, thumb, caption, desc, category_id, area, diff, shop } = req.body
+  if (!title || !thumb || !caption || !desc || !category_id || !area || !diff || !shop || (shop && !Array.isArray(shop))) {
     res.json(assertError('参数不对'))
   }
   const id = uuidV1()
-  let p2 = []
+  models.sweet_info.create(Object.assign({}, req.body, {
+    createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
+    updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
+  })).then(result => {
+    res.json({
+      code: 200,
+      message: '添加成功',
+      data: result.id
+    })
+  }).catch(err => {
+    res.json(assertError(err.toString()))
+  })
+  /*let p2 = []
   let shopIdList = []
   shop.forEach( (item) => {
     p2.push(models.shop.create(Object.assign({}, item, {
@@ -44,15 +56,15 @@ exports.create = (req, res) =>{
     }))
   }).catch(err=> {
     res.json(assertError(err.toString()))
-  })
+  })*/
 }
 
 
 /**
- * 甜品详情列表
+ * 甜品列表
  */
 
-exports.list = (req, res) => {
+exports.getList = (req, res) => {
   general.list(req, res, models.sweet_info)
 }
 
@@ -61,17 +73,42 @@ exports.list = (req, res) => {
  * @methods getItem
  */
 
-exports.getItem = (req, res) =>{
-  const {id} = req.query
-  if(!id){
+exports.getItem = (req, res) => {
+  const { id } = req.query
+  if (!id) {
     res.json(assertError('参数错误'))
   }
   return models.sweet_info.findById(id).then(result => {
-    if(!result){
+    if (!result) {
       return res.json({
         code: -200,
         data: null
       })
     }
+    res.json({
+      code: 200,
+      data: result,
+      message: 'success'
+    })
+  }).catch(err => {
+    res.json(assertError(err.toString()))
   })
+}
+
+/**
+ * 删除甜品
+ * @methods deleteById
+ */
+
+exports.deleteById = (req, res) => {
+  general.deleteById(req, res, models.sweet_info)
+}
+
+/**
+ * 更新甜品
+ * @methods modify
+ */
+
+exports.modify = (req, res) => {
+  general.updateData(req, res, models.sweet_info)
 }
