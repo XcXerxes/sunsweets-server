@@ -69,3 +69,12 @@ exports.modify = (req, res) => {
         updatedAt: moment().format('YYYY-MM-DD HH:mm:ss')
     }), res, models.carousel)
 }
+
+/**
+ * 上传轮播图片
+ * @methods uploadImg
+ */
+
+exports.uploadImg = (req, res) =>{
+    //if(req.files && )
+}

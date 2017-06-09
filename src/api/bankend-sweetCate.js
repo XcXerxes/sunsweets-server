@@ -7,7 +7,7 @@ const assertError = require('../utils/asserts')
 /**
  * 列表
  */
-exports.list = (req, res) => {
+exports.getList = (req, res) => {
   general.list(req, res, models.sweet_category)
 }
 
@@ -41,7 +41,7 @@ exports.create = (req, res) => {
  * 查看 单个
  */
 
-exports.item = (req, res) =>{
+exports.getItem = (req, res) =>{
   general.item(req, res, models.sweet_category)
 }
 

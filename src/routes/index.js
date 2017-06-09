@@ -44,7 +44,7 @@ router.post('/bankend/carousel/update', isAuthorize, bankendCarousel.modify)
 // ----------------- 甜品分类 ----------------
 
 // 分类列表
-router.get('/bankend/sweetCate/list', isAuthorize,bankendSweetCate.list)
+router.get('/bankend/sweetCate/list', isAuthorize,bankendSweetCate.getList)
 
 //分类添加
 router.post('/bankend/sweetCate/add', isAuthorize,bankendSweetCate.create)
