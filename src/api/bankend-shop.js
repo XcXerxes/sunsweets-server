@@ -1,8 +1,17 @@
+const path = require('path')
 const general = require('./general')
 const models = require('../models')
 const moment = require('moment')
 const uuidV1 = require('uuid/v1')
 const assertError = require('../utils/asserts')
+const multer = require('multer')
+
+// 存储图片路径的类
+const StorageDir = require('../utils/uploader')
+
+const uploader = multer({
+  storage: new StorageDir('/images').diskStorage()
+}).array('shopImg',3)
 
 
 /**
@@ -69,4 +78,8 @@ exports.modify = (req, res) => {
   general.updateData(Object.assign({}, req.body, {
     updatedAt: moment().format('YYYY-MM-DD HH:mm:ss')
   }))
+}
+
+exports.uploadImg = (req, res) =>{
+  general.uploadImg(req, res)
 }
