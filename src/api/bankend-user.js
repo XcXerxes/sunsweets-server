@@ -1,7 +1,13 @@
 const jwt = require('jsonwebtoken')
 const models = require('../models')
-const secret = require('../config/secret')
 const assertError = require('../utils/asserts')
+const moment = require('moment')
+
+// 验证secret是否存在
+require('../utils').createSecret()
+
+// 密钥时间戳
+const superSecret = require('../config/superSecret.json')['superSecret']
 
 /**
  * 管理员登录
@@ -19,18 +25,30 @@ exports.login = (req, res) => {
       username,
       password
     }
-  }).then(info => {
-    if (info) {
-      const remember_me = 2592000000
-      const token = jwt.sign({ username }, secret.secret, { expiresIn: 60 * 60 * 24 * 30 })
-      res.cookie('sun_userid', token, { maxAge: remember_me })
+  }).then(user => {
+    if (!user) {
+      return res.json(assertError('用户不存在'))
+    } else if (user) {
+      if (user.password !== password) {
+        return res.json(assertError('密码错误'))
+      }
+      models.User.update({
+        updatedAt: moment().format('YYYY-MM-DD HH:mm:ss')
+      }, {
+          where: {
+            username
+          }
+        })
+      const token = jwt.sign({username:encodeURI(username),password}, superSecret.toString(), {
+        expiresIn: 60 * 60 * 3 // expires in 3 hours token 过期时间为3 hours
+      });
       return res.json({
         code: 200,
         message: '登录成功',
         data: token
       })
     }
-    return res.json(assertError('用户名或密码错误'))
+    //return res.json(assertError('用户名或密码错误'))
   }).catch(err => {
     res.json(assertError(err.toString()))
   })

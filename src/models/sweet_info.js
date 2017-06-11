@@ -12,5 +12,7 @@ module.exports = (sequelize, DataType) =>{
     area_id: DataType.STRING,   // 地区
     diff: DataType.INTEGER,  // 操作难度
     shop_id: DataType.STRING, //餐厅
+    createdAt: DataType.DATE,
+    updatedAt: DataType.DATE
   })
 }

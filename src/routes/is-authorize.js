@@ -1,18 +1,18 @@
 const jwt = require('jsonwebtoken')
-const secret = require('../config/secret')
+const superSecret = require('../config/superSecret.json')['superSecret']
 
 module.exports = (req, res, next) => {
-  const { sun_userid } = req.cookies
-  if (sun_userid) {
-    jwt.verify(sun_userid, secret, (err, decoded) => {
+  const sun_token = req.body.token || req.param('token') || req.headers['sweet-token']
+  if (sun_token) {
+    jwt.verify(sun_token, superSecret.toString(), (err, decoded) => {
       if (!err) {
         req.decoded = decoded
         next()
       } else {
-        res.cookies('sun_userid', '', { maxAge: 0 })
+        //res.cookies('sun_userid', '', { maxAge: 0 })
         return res.json({
           code: -500,
-          message: '登录验证失败',
+          message: '验证失败,请重新登录',
           data: ''
         })
       }
@@ -20,7 +20,7 @@ module.exports = (req, res, next) => {
   } else {
     return res.json({
       code: -500,
-      message: '请先登录',
+      message: '没有权限,请重新登录',
       data: ''
     })
   }

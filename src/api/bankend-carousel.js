@@ -3,14 +3,7 @@ const general = require('./general')
 const moment = require('moment')
 const uuidV1 = require('uuid/v1');
 const assertError = require('../utils/asserts')
-const multer = require('multer')
 
-// 存储图片路径的类
-const StorageDir = require('../utils/uploader')
-
-const uploader = multer({
-  storage: new StorageDir('/images').diskStorage()
-}).array('carouselImg',3)
 
 /**
  * 获取轮播图列表
@@ -34,6 +27,7 @@ exports.create = (req, res) => {
         id: uuidV1(),
         title,
         img,
+        caption,
         createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
         updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
     }).then((result) => {
@@ -68,21 +62,7 @@ exports.deleteById = (req, res) => {
  */
 
 exports.modify = (req, res) => {
-    const { id } = req.body
-    if (!id) {
-        res.json(assertError('参数错误'))
-    }
-
     general.updateData(Object.assign({}, req.body, {
         updatedAt: moment().format('YYYY-MM-DD HH:mm:ss')
     }), res, models.carousel)
-}
-
-/**
- * 上传轮播图片
- * @methods uploadImg
- */
-
-exports.uploadImg = (req, res) =>{
-    //if(req.files && )
 }

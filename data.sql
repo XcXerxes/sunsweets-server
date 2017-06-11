@@ -1,6 +1,7 @@
 CREATE TABLE IF NOT EXISTS `users`(
-   `username` VARCHAR(100) NOT NULL,
-   `password` VARCHAR(100) NOT NULL,
+   `username` VARCHAR(64) NOT NULL,
+   `password` VARCHAR(64) NOT NULL,
+   `author` VARCHAR(32) NOT NULL,
    `createdAt` DATETIME NOT NULL,
    `updatedAt` DATETIME NOT NULL,
    PRIMARY KEY ( `username` )
@@ -19,10 +20,10 @@ CREATE TABLE IF NOT EXISTS `carousels`(
 
 CREATE TABLE IF NOT EXISTS `shops`(
    `id` VARCHAR(64) NOT NULL,
-   `name` VARCHAR(100) NOT NULL,
-   `sweet_id` VARCHAR(100) NOT NULL,
+   `name` VARCHAR(64) NOT NULL,
+   `sweet_id` VARCHAR(64) NOT NULL,
    `level` INTEGER NOT NULL,
-   `address` VARCHAR(100) NOT NULL,
+   `address` VARCHAR(64) NOT NULL,
    `imgGroup` VARCHAR(100) NOT NULL,
    `createdAt` DATETIME NOT NULL,
    `updatedAt` DATETIME NOT NULL,

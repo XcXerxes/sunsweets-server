@@ -57,12 +57,13 @@ exports.list = (req, res, models) => {
     limit,
     order:`${sortName} ${sortType}`
   }).then(result => {
-    const {total,rows} = result
-    const totalPage = Math.ceil(total / limit)
+    const {count,rows} = result
+    const totalPage = Math.ceil(count / limit)
+    console.log(result)
     res.json({
       code:200,
       data:rows,
-      total,
+      total: count,
       totalPage
     })
   }).catch(err =>{
@@ -155,17 +156,3 @@ exports.updateData = (req,res,models) =>{
  * recover // 恢复
  */
 
-/**
- * 通用上传
- * 
- * @methods  uploadImg
- */
-
-exports.uploadImg = (req, res) =>{
-  if(req.files[0].size>512000){
-    res.json(assertError('大小超过限制'))
-  }
-  res.json({
-    files:req.files[0]
-  })
-}

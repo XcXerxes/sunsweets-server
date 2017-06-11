@@ -9,10 +9,10 @@ const bankendSweetCate = require('../api/bankend-sweetCate')
 const bankendSweetInfo = require('../api/bankend-sweetInfo')
 const bankendShop = require('../api/bankend-shop')
 const isAuthorize = require('./is-authorize')
-// 后台系统登录
-router.post('/bankend', (req, res)=>{
-    bankendUser
-})
+const bankendUploader = require('../api/bankend-uploader')
+
+const mutiliUpload = require('../utils/uploader')
+
 
 /**
  * API 
@@ -23,6 +23,10 @@ router.post('/bankend', (req, res)=>{
 // ---------- 管理 --------------
 // 后台登录
 router.post('/bankend/login', bankendUser.login)
+
+// ------------   上传图片 ----------------------------
+
+router.post('/bankend/upload', mutiliUpload,bankendUploader)
 
 // ---------------- 轮播图 ------------------------------
 

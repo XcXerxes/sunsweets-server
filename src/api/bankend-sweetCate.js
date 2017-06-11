@@ -51,10 +51,6 @@ exports.getItem = (req, res) =>{
  */
 
 exports.modify = (req, res) =>{
-  const {id} = req.body
-  if(!id){
-    res.json(assertError('参数错误'))
-  }
   general.updateData(Object.assign({}, req.body, {
     updatedAt: moment().format('YYYY-MM-DD HH:mm:ss')
   }), res, models.sweet_category)
