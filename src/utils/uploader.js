@@ -22,4 +22,10 @@ class StorageDir {
   }
 }
 
-module.exports = StorageDir 
+
+const mutiliUpload = multer({
+  storage: new StorageDir('/images').diskStorage()
+}).array('bankend',3)
+
+
+module.exports = mutiliUpload 

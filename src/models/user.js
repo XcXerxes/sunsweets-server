@@ -6,7 +6,9 @@ module.exports = (sequelize, DataType) => {
             type: DataType.STRING(64),
             primaryKey: true
         },
-        password: DataType.STRING(64)
+        password: DataType.STRING(64),
+        createdAt: DataType.DATE,
+        updatedAt: DataType.DATE
     })
     return User
 }

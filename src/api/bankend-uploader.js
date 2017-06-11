@@ -1,17 +1,14 @@
-const multer = require('multer')
-const path = require('path')
+/**
+ * 通用上传
+ * 
+ * @methods  uploadImg
+ */
 
-const Storage = multer.diskStorage({
-     destination: function(req, file, callback) {
-         callback(null, path.join(__dirname,"./static/images"));
-     },
-     filename: function(req, file, callback) {
-         callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
-     }
- });
-
- const multerUpload = (callback) =>{
-     return multer({
-         storage:Storage
-     })[callback]
- }
+module.exports = (req, res) =>{
+  if(req.files[0].size>512000){
+    res.json(assertError('大小超过限制'))
+  }
+  res.json({
+    files:req.files[0]
+  })
+}
