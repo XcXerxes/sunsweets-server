@@ -11,9 +11,11 @@ class StorageDir {
     this.dirPath = options.dirPath
   }
   diskStorage() {
+    const self = this
     return multer.diskStorage({
       destination: function (req, file, callback) {
-        callback(null, this.dirPath);
+        console.log(self.dirPath+':'+self.options)
+        callback(null, self.dirPath);
       },
       filename: function (req, file, callback) {
         callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
@@ -24,7 +26,9 @@ class StorageDir {
 
 
 const mutiliUpload = multer({
-  storage: new StorageDir('/images').diskStorage()
+  storage: new StorageDir({
+    dirPath: path.join(__dirname,'../../','static/images')
+  }).diskStorage()
 }).array('bankend',3)
 
 

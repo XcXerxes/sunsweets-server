@@ -26,7 +26,7 @@ router.post('/bankend/login', bankendUser.login)
 
 // ------------   上传图片 ----------------------------
 
-router.post('/bankend/upload', mutiliUpload,bankendUploader)
+router.post('/bankend/upload', isAuthorize, mutiliUpload, bankendUploader)
 
 // ---------------- 轮播图 ------------------------------
 
@@ -48,19 +48,19 @@ router.post('/bankend/carousel/update', isAuthorize, bankendCarousel.modify)
 // ----------------- 甜品分类 ----------------
 
 // 分类列表
-router.get('/bankend/sweetCate/list', isAuthorize,bankendSweetCate.getList)
+router.get('/bankend/sweetCate/list', isAuthorize, bankendSweetCate.getList)
 
 //分类添加
-router.post('/bankend/sweetCate/add', isAuthorize,bankendSweetCate.create)
+router.post('/bankend/sweetCate/add', isAuthorize, bankendSweetCate.create)
 
 //分类查看单个
-router.get('/bankend/sweetCate/view', isAuthorize,bankendSweetCate.getItem)
+router.get('/bankend/sweetCate/view', isAuthorize, bankendSweetCate.getItem)
 
 //分类修改单个
-router.post('/bankend/sweetCate/update', isAuthorize,bankendSweetCate.modify)
+router.post('/bankend/sweetCate/update', isAuthorize, bankendSweetCate.modify)
 
 //分类删除单个
-router.get('/bankend/sweetCate/delete', isAuthorize,bankendSweetCate.deleteById)
+router.get('/bankend/sweetCate/delete', isAuthorize, bankendSweetCate.deleteById)
 
 // ---------------------------- 甜品信息 ------------------------
 
