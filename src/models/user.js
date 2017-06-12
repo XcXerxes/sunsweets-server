@@ -7,7 +7,7 @@ module.exports = (sequelize, DataType) => {
             primaryKey: true
         },
         password: DataType.STRING(64),
-        admin: DataType.BOOLEAN,
+        authorize: DataType.STRING(32),
         createdAt: DataType.DATE,
         updatedAt: DataType.DATE
     })

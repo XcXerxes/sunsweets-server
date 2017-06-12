@@ -9,6 +9,7 @@ require('../utils').createSecret()
 // 密钥时间戳
 const superSecret = require('../config/superSecret.json')['superSecret']
 
+
 /**
  * 管理员登录
  * @method loginAdmin
@@ -39,7 +40,7 @@ exports.login = (req, res) => {
             username
           }
         })
-      const token = jwt.sign({username:encodeURI(username),password}, superSecret.toString(), {
+      const token = jwt.sign({ username: encodeURI(username), password }, superSecret.toString(), {
         expiresIn: 60 * 60 * 3 // expires in 3 hours token 过期时间为3 hours
       });
       return res.json({
