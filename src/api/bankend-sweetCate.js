@@ -51,9 +51,7 @@ exports.getItem = (req, res) =>{
  */
 
 exports.modify = (req, res) =>{
-  general.updateData(Object.assign({}, req.body, {
-    updatedAt: moment().format('YYYY-MM-DD HH:mm:ss')
-  }), res, models.sweet_category)
+  general.updateData(req, res, models.sweet_category)
 }
 
 /**

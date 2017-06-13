@@ -37,10 +37,10 @@ router.get('/bankend/carousel/list', isAuthorize, bankendCarousel.getList)
 router.post('/bankend/carousel/add', isAuthorize, bankendCarousel.create)
 
 // 后台轮播图查看单个
-router.get('/bankend/carousel/view', isAuthorize, bankendCarousel.getItem)
+router.get('/bankend/carousel/view/:id', isAuthorize, bankendCarousel.getItem)
 
 // 后台轮播图删除单个
-router.get('/bankend/carousel/delete', isAuthorize, bankendCarousel.deleteById)
+router.get('/bankend/carousel/delete/:id', isAuthorize, bankendCarousel.deleteById)
 
 // 后台轮播图修改单个
 router.post('/bankend/carousel/update', isAuthorize, bankendCarousel.modify)

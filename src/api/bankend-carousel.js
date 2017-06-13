@@ -62,7 +62,5 @@ exports.deleteById = (req, res) => {
  */
 
 exports.modify = (req, res) => {
-    general.updateData(Object.assign({}, req.body, {
-        updatedAt: moment().format('YYYY-MM-DD HH:mm:ss')
-    }), res, models.carousel)
+    general.updateData(req, res, models.carousel)
 }

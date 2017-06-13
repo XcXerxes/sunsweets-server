@@ -2,7 +2,7 @@
  * 通用create
  * @methods  create
  */
-
+const moment = require('moment')
 /*exports.create = (req, res, models) =>{
 
 }*/
@@ -15,7 +15,7 @@
  */
 
 exports.item = (req, res, models) => {
-  const { id } = req.query
+  const id = req.query.id || req.params.id || req.body.id 
   if (!id) {
     res.json({
       code: -200,
@@ -101,7 +101,7 @@ exports.deleteAll = (req, res, models) =>{
  */
 
 exports.deleteById = (req, res, models) =>{
-  const id = req.query.id
+  const id = req.query.id || req.params.id || req.body.id 
   if(!id){
     res.json({
       code: -200,
@@ -127,14 +127,17 @@ exports.deleteById = (req, res, models) =>{
  * @methods update
  */
 exports.updateData = (req,res,models) =>{
-  const {id} = req.body.id
+  const {id,createdAt} = req.body
   if(!id){
     res.json({
       code:-200,
       message:'参数错误'
     })
   }
-  models.update(req.body, {
+  models.update(Object.assign({},req.body,{
+    createdAt: moment(createdAt).format('YYYY-MM-DD HH:mm:ss'),
+    updatedAt: moment().format('YYYY-MM-DD HH:mm:ss')
+  }), {
     where:{
       id
     }
