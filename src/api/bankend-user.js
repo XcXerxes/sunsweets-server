@@ -21,19 +21,17 @@ exports.login = (req, res) => {
   if (username === '' || password === '') {
     return res.json(assertError('请输入用户名和密码'))
   }
-  models.User.findOne({
+  models.user.findOne({
     where: {
       username,
       password
     }
   }).then(user => {
+    console.log("user============"+user)
     if (!user) {
-      return res.json(assertError('用户不存在'))
+      return res.json(assertError('用户名或者密码错误'))
     } else if (user) {
-      if (user.password !== password) {
-        return res.json(assertError('密码错误'))
-      }
-      models.User.update({
+      models.user.update({
         updatedAt: moment().format('YYYY-MM-DD HH:mm:ss')
       }, {
           where: {

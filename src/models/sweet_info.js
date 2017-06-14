@@ -1,6 +1,6 @@
-module.exports = (sequelize, DataType) =>{
-  return sequelize.define('sweet_info',{
-    id:{
+module.exports = (sequelize, DataType) => {
+  return sequelize.define('sweet_info', {
+    id: {
       type: DataType.STRING(64),
       primaryKey: true
     },
@@ -14,5 +14,8 @@ module.exports = (sequelize, DataType) =>{
     shop_id: DataType.STRING, //餐厅
     createdAt: DataType.DATE,
     updatedAt: DataType.DATE
-  })
+  }, {
+      timestamps: false,
+      //freezeTableName: true // Model 对应的表名将与model名相同
+    })
 }

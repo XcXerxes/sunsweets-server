@@ -40,7 +40,7 @@ router.post('/bankend/carousel/add', isAuthorize, bankendCarousel.create)
 router.get('/bankend/carousel/view/:id', isAuthorize, bankendCarousel.getItem)
 
 // 后台轮播图删除单个
-router.get('/bankend/carousel/delete/:id', isAuthorize, bankendCarousel.deleteById)
+router.delete('/bankend/carousel/delete', isAuthorize, bankendCarousel.deleteById)
 
 // 后台轮播图修改单个
 router.post('/bankend/carousel/update', isAuthorize, bankendCarousel.modify)

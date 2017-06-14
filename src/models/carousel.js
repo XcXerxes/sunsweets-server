@@ -1,6 +1,6 @@
-module.exports = (sequelize, DataType) =>{
-  return sequelize.define('carousel',{
-    id:{
+module.exports = (sequelize, DataType) => {
+  return sequelize.define('carousel', {
+    id: {
       type: DataType.STRING(64),
       primaryKey: true
     },
@@ -8,8 +8,9 @@ module.exports = (sequelize, DataType) =>{
     title: DataType.STRING, // 标题
     caption: DataType.STRING,// 简要介绍
     createdAt: DataType.DATEONLY,
-    updatedAt: DataType.DATEONLY                   
-  },{
-    timestamps:false
-  })
+    updatedAt: DataType.DATEONLY
+  }, {
+      timestamps: false,
+      //freezeTableName: true // Model 对应的表名将与model名相同
+    })
 }
