@@ -10,7 +10,9 @@ module.exports = (sequelize, DataType) =>{
     desc: DataType.TEXT,   // 具体的内容
     category_id: DataType.STRING, // 分类
     area_id: DataType.STRING,   // 地区
-    difficulty: DataType.INTEGER,  // 操作难度
-    restaurant_id: DataType.STRING, //餐厅
+    diff: DataType.INTEGER,  // 操作难度
+    shop_id: DataType.STRING, //餐厅
+    createdAt: DataType.DATE,
+    updatedAt: DataType.DATE
   })
 }

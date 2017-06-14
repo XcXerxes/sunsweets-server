@@ -2,7 +2,7 @@
  * 通用create
  * @methods  create
  */
-
+const moment = require('moment')
 /*exports.create = (req, res, models) =>{
 
 }*/
@@ -15,7 +15,7 @@
  */
 
 exports.item = (req, res, models) => {
-  const { id } = req.query
+  const id = req.query.id || req.params.id || req.body.id 
   if (!id) {
     res.json({
       code: -200,
@@ -44,24 +44,26 @@ exports.item = (req, res, models) => {
  * @params  sort   排序
  */
 
-exports.list = (req, res, models, sort) => {
-  const sortName = (sort && sort.sortName) ||'id'
-  const sortType = (sort && sort.sortName) ||'asc'
-  let {limit,currentPage} = req.query
+exports.list = (req, res, models) => {
+  let {limit,currentPage,sort} = req.query
+  const sortName = (sort && sort.split('-')[0]) ||'id'
+  const sortType = (sort && sort.split('-')[1]) ||'asc'
   limit = parseInt(limit,10) || 1
   currentPage = parseInt(currentPage,10) || 10
+  
   const offset = (currentPage - 1) * limit
   models.findAndCountAll({
     offset,
     limit,
     order:`${sortName} ${sortType}`
   }).then(result => {
-    const {total,rows} = result
-    const totalPage = Math.ceil(total / limit)
+    const {count,rows} = result
+    const totalPage = Math.ceil(count / limit)
+    console.log(result)
     res.json({
       code:200,
       data:rows,
-      total,
+      total: count,
       totalPage
     })
   }).catch(err =>{
@@ -99,7 +101,7 @@ exports.deleteAll = (req, res, models) =>{
  */
 
 exports.deleteById = (req, res, models) =>{
-  const id = req.query.id
+  const id = req.query.id || req.params.id || req.body.id 
   if(!id){
     res.json({
       code: -200,
@@ -125,14 +127,17 @@ exports.deleteById = (req, res, models) =>{
  * @methods update
  */
 exports.updateData = (req,res,models) =>{
-  const {id} = req.body.id
+  const {id,createdAt} = req.body
   if(!id){
     res.json({
       code:-200,
       message:'参数错误'
     })
   }
-  models.update(req.body, {
+  models.update(Object.assign({},req.body,{
+    createdAt: moment(createdAt).format('YYYY-MM-DD HH:mm:ss'),
+    updatedAt: moment().format('YYYY-MM-DD HH:mm:ss')
+  }), {
     where:{
       id
     }
@@ -153,3 +158,4 @@ exports.updateData = (req,res,models) =>{
  * 通用
  * recover // 恢复
  */
+

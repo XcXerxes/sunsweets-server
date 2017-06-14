@@ -6,7 +6,9 @@ module.exports = (sequelize, DataType) =>{
     },
     img: DataType.STRING,  // 轮播图片
     title: DataType.STRING, // 标题
-    caption: DataType.STRING // 简要介绍                   
+    caption: DataType.STRING,// 简要介绍
+    createdAt: DataType.DATEONLY,
+    updatedAt: DataType.DATEONLY                   
   },{
     timestamps:false
   })

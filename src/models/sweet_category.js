@@ -4,7 +4,10 @@ module.exports = (sequelize, DataType) =>{
       type: DataType.STRING(64),
       primaryKey: true
     },
-    title: DataType.STRING(64)
+    title: DataType.STRING(64),
+    sweet_order: DataType.INTEGER, //分类
+    createdAt: DataType.DATEONLY,
+    updatedAt: DataType.DATEONLY 
   },{
     timestamps:false
   })

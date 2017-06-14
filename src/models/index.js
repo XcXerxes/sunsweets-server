@@ -7,6 +7,7 @@ const config = require('../config')
 
 const sequelize = new Sequelize(config.database, config.username, config.password, config)
 
+sequelize.sync()
 
 // 定义 当前目录下所有的数据 模型, (数据库表名为文件名)
 let db = {};

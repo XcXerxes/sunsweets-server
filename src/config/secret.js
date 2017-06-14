@@ -1,1 +1,0 @@
-exports.secret = `${Math.random() * 1000000}`
