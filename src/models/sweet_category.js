@@ -6,8 +6,8 @@ module.exports = (sequelize, DataType) => {
     },
     title: DataType.STRING(64),
     sweet_order: DataType.INTEGER, //分类
-    createdAt: DataType.DATEONLY,
-    updatedAt: DataType.DATEONLY
+    createdAt: DataType.DATE,
+    updatedAt: DataType.DATE
   }, {
       timestamps: false,
       //freezeTableName: true // Model 对应的表名将与model名相同
