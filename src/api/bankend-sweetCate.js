@@ -8,7 +8,7 @@ const assertError = require('../utils/asserts')
  * 列表
  */
 exports.getList = (req, res) => {
-  general.list(req, res, models.sweet_category)
+  general.list(req, res, models.sweet_cate)
 }
 
 /**
@@ -16,14 +16,14 @@ exports.getList = (req, res) => {
  */
 
 exports.create = (req, res) => {
-  const { title, sweet_order } = req.body
-  if (!title || !sweet_order) {
+  const { title, sweet_order, area} = req.body
+  if (!title || !sweet_order || !area) {
     res.json(assertError('参数错误'))
   }
-  return models.sweet_category.create({
+  return models.sweet_cate.create({
     title,
     sweet_order,
-    id: uuidV1(),
+    area,
     createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
     updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
   }).then((result) => {
@@ -42,7 +42,7 @@ exports.create = (req, res) => {
  */
 
 exports.getItem = (req, res) =>{
-  general.item(req, res, models.sweet_category)
+  general.item(req, res, models.sweet_cate)
 }
 
 
@@ -51,7 +51,7 @@ exports.getItem = (req, res) =>{
  */
 
 exports.modify = (req, res) =>{
-  general.updateData(req, res, models.sweet_category)
+  general.updateData(req, res, models.sweet_cate)
 }
 
 /**
@@ -59,5 +59,5 @@ exports.modify = (req, res) =>{
  */
 
 exports.deleteById = (req, res) =>{
-  general.deleteById(req, res, models.sweet_category)
+  general.deleteById(req, res, models.sweet_cate)
 }

@@ -5,7 +5,7 @@ module.exports = (sequelize, DataType) => {
       primaryKey: true
     },
     name: DataType.STRING(64), // 餐厅名称
-    sweet_id: DataType.STRING(64), // 所属甜品的id
+    sweet_info_id: DataType.STRING(64), // 所属甜品的id
     level: DataType.INTEGER,  // 推荐指数，最高5星
     address: DataType.STRING,  // 餐厅的地址
     imgGroup: DataType.STRING, // 餐厅的照片,

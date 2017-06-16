@@ -38,14 +38,17 @@ InfoMap.belongsTo(Info);
     Info.create({
         name: '夏日嬷嬷茶',
     })
-   InfoMap.create({
-        title: '台湾甜点',
-        info_id:"a291a89f-cc55-4f83-9b3f-2d9b36076bab"
-    })
+   
 })*/
- 
-InfoMap.findAll({
+
+InfoMap.create({
+        title: '台湾甜点',
+        info_id:"062c33da-8997-4b02-ad14-324175a48754"
+    }).then( ()=>{
+        InfoMap.findAll({
     include: [Info]
 }).then(data =>{
     console.log(JSON.stringify(data))
 })
+    })
+

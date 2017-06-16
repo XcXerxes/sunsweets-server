@@ -16,35 +16,8 @@ dirs.filter(file => (file.indexOf('.') !== 0) && (file !== 'index.js'))
     .forEach(file => {
         let model = sequelize.import(path.join(__dirname, file))
         db[model.name] = model
-    })
-
-/*Object.keys(db).forEach(modelName => {
-    if ('associate' in db[modelName]) {
-        db[modelName].associate(db)
-    }
-})*/
-//Sequelize.sync({force: true})
-
+})
 db.sequelize = sequelize
 db.Sequelize = Sequelize
 
 module.exports = db
-
-/*sequelize.define('User',{
-        username:{
-            type: Sequelize.STRING(64),
-            primaryKey: true
-        },
-        password: Sequelize.STRING(64),
-    },{
-        timestamps:false
-    }).findOne({
-        where:{
-            username:'admin',
-            password:'admin'
-        }
-    }).then(p =>{
-        console.log(JSON.stringify(p))
-    }).catch(err=>{
-        console.log(err)
-    })*/

@@ -24,7 +24,6 @@ exports.create = (req, res) => {
         res.json(assertError('参数错误'))
     }
     return models.carousel.create({
-        id: uuidV1(),
         title,
         img,
         caption,

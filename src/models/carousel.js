@@ -1,8 +1,9 @@
 module.exports = (sequelize, DataType) => {
   return sequelize.define('carousel', {
     id: {
-      type: DataType.STRING(64),
-      primaryKey: true
+      type: DataType.UUID,
+      primaryKey: true,
+      defaultValue: DataType.UUIDV1 
     },
     img: DataType.STRING,  // 轮播图片
     title: DataType.STRING, // 标题
