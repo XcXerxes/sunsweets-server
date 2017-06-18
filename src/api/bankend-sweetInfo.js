@@ -14,21 +14,22 @@ models.sweet_info.hasMany(models.shop)
  */
 
 exports.create = (req, res) => {
-  const { title, thumb, caption, desc, sweet_cate_id, area, diff, shop } = req.body
-  if (!title || !thumb || !caption || !desc || !sweet_cate_id || !area || !diff || !shop || (shop && !Array.isArray(shop))) {
+  console.log(req.body)
+  const { title, thumb, caption, desc, sweet_cate_id, area, diff, shop_id } = req.body
+  if (!title || !thumb || !caption || !desc || !sweet_cate_id || !area || !diff || !shop_id) {
     res.json(assertError('参数不对'))
   }
   models.sweet_info.create(Object.assign({}, req.body, {
     createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
     updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
   })).then(result => {
-    res.json({
+    return res.json({
       code: 200,
       message: '添加成功',
       data: result.id
     })
   }).catch(err => {
-    res.json(assertError(err.toString()))
+    return res.json(assertError(err.toString()))
   })
   /*let p2 = []
   let shopIdList = []

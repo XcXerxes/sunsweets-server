@@ -62,6 +62,11 @@ router.post('/bankend/sweetCate/update', isAuthorize, bankendSweetCate.modify)
 //分类删除单个
 router.delete('/bankend/sweetCate/delete', isAuthorize, bankendSweetCate.deleteById)
 
+// 获取所有分类列表
+router.get('/bankend/sweetCate/all', isAuthorize, bankendSweetCate.getAll)
+
+
+
 // ---------------------------- 甜品信息 ------------------------
 
 // 甜品信息列表
