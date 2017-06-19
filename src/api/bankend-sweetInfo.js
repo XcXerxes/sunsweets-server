@@ -106,7 +106,7 @@ exports.getList = (req, res) => {
  */
 
 exports.getItem = (req, res) => {
-  const { id } = req.query
+  const { id } = req.query || req.params || req.body
   if (!id) {
     res.json(assertError('参数错误'))
   }

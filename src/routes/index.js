@@ -82,7 +82,7 @@ router.post('/bankend/sweetInfo/add', isAuthorize, bankendSweetInfo.create)
 router.post('/bankend/sweetInfo/update', isAuthorize, bankendSweetInfo.modify)
 
 // 甜品信息删除
-router.get('/bankend/sweetInfo/delete', isAuthorize, bankendSweetInfo.deleteById)
+router.delete('/bankend/sweetInfo/delete', isAuthorize, bankendSweetInfo.deleteById)
 
 // ------------------------------  推荐餐厅信息  ----------------------------
 
