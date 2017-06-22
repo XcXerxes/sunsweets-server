@@ -46,10 +46,10 @@ exports.item = (req, res, models) => {
 
 exports.list = (req, res, models) => {
   let {limit,currentPage,sort} = req.query
-  const sortName = (sort && sort.split('-')[0]) ||'id'
+  const sortName = (sort && sort.split('-')[0]) ||'createdAt'
   const sortType = (sort && sort.split('-')[1]) ||'asc'
-  limit = parseInt(limit,10) || 1
-  currentPage = parseInt(currentPage,10) || 10
+  limit = parseInt(limit,10) || 5
+  currentPage = parseInt(currentPage,10) || 1
   
   const offset = (currentPage - 1) * limit
   models.findAndCountAll({
