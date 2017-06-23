@@ -2,8 +2,8 @@
 module.exports = {
     database: 'sun_sweets',
     username:'root',
-    password:'root',
-    host: '192.168.1.52',
+    password:'1234',
+    host: 'localhost',
     dialect: 'mysql',
     pool: {
         max: 5,
