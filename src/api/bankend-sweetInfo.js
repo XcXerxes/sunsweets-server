@@ -4,28 +4,32 @@ const bankendShop = require('./bankend-shop')
 const moment = require('moment')
 const uuidV1 = require('uuid/v1')
 const assertError = require('../utils/asserts')
+
+models.sweet_info.belongsTo(models.sweet_cate)
+models.sweet_info.hasMany(models.shop)
+
 /**
  * 添加甜品
  * @methods create
  */
 
 exports.create = (req, res) => {
-  const { title, thumb, caption, desc, category_id, area, diff, shop } = req.body
-  if (!title || !thumb || !caption || !desc || !category_id || !area || !diff || !shop || (shop && !Array.isArray(shop))) {
+  console.log(req.body)
+  const { title, thumb, caption, desc, sweet_cate_id, area, diff, shop_id } = req.body
+  if (!title || !thumb || !caption || !desc || !sweet_cate_id || !area || !diff || !shop_id) {
     res.json(assertError('参数不对'))
   }
-  const id = uuidV1()
   models.sweet_info.create(Object.assign({}, req.body, {
     createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
     updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
   })).then(result => {
-    res.json({
+    return res.json({
       code: 200,
       message: '添加成功',
       data: result.id
     })
   }).catch(err => {
-    res.json(assertError(err.toString()))
+    return res.json(assertError(err.toString()))
   })
   /*let p2 = []
   let shopIdList = []
@@ -65,7 +69,35 @@ exports.create = (req, res) => {
  */
 
 exports.getList = (req, res) => {
-  general.list(req, res, models.sweet_info)
+  let { limit, currentPage, sort } = req.query
+  const sortName = (sort && sort.split('-')[0]) || 'id'
+  const sortType = (sort && sort.split('-')[1]) || 'asc'
+  limit = parseInt(limit, 10) || 1
+  currentPage = parseInt(currentPage, 10) || 10
+
+  const offset = (currentPage - 1) * limit
+  models.sweet_info.findAndCountAll({
+    offset,
+    limit,
+    order: `${sortName} ${sortType}`,
+    include:[models.sweet_cate]
+  }).then(result => {
+    const { count, rows } = result
+    const totalPage = Math.ceil(count / limit)
+    console.log(result)
+    res.json({
+      code: 200,
+      data: rows,
+      total: count,
+      totalPage
+    })
+  }).catch(err => {
+    res.json({
+      code: -200,
+      message: err.toString()
+    })
+  })
+  /*general.list(req, res, models.sweet_info)*/
 }
 
 /**
@@ -74,7 +106,7 @@ exports.getList = (req, res) => {
  */
 
 exports.getItem = (req, res) => {
-  const { id } = req.query
+  const { id } = req.query || req.params || req.body
   if (!id) {
     res.json(assertError('参数错误'))
   }

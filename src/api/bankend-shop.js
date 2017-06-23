@@ -5,6 +5,7 @@ const moment = require('moment')
 const uuidV1 = require('uuid/v1')
 const assertError = require('../utils/asserts')
 
+models.shop.belongsTo(models.sweet_info)
 
 
 /**

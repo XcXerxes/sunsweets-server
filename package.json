@@ -7,7 +7,8 @@
   "author": "xcxerxes <xiac@jieshuibao.com>",
   "license": "MIT",
   "scripts": {
-    "start": "supervisor app.js"
+    "start": "supervisor app.js",
+    "mock": "node src/mock/createTable & node src/mock/testData"
   },
   "dependencies": {
     "body-parser": "^1.17.2",

@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 
-// api
+// api bankend
 const bankendUser = require('../api/bankend-user')
 const bankendCarousel = require('../api/bankend-carousel')
 const bankendSweetCate = require('../api/bankend-sweetCate')
@@ -11,7 +11,11 @@ const bankendShop = require('../api/bankend-shop')
 const isAuthorize = require('./is-authorize')
 const bankendUploader = require('../api/bankend-uploader')
 
+// 上传图片
 const mutiliUpload = require('../utils/uploader')
+
+//frontend
+const frontendCarousel = require('../api//frontend-carousel')
 
 
 /**
@@ -40,7 +44,7 @@ router.post('/bankend/carousel/add', isAuthorize, bankendCarousel.create)
 router.get('/bankend/carousel/view/:id', isAuthorize, bankendCarousel.getItem)
 
 // 后台轮播图删除单个
-router.get('/bankend/carousel/delete/:id', isAuthorize, bankendCarousel.deleteById)
+router.delete('/bankend/carousel/delete', isAuthorize, bankendCarousel.deleteById)
 
 // 后台轮播图修改单个
 router.post('/bankend/carousel/update', isAuthorize, bankendCarousel.modify)
@@ -60,7 +64,12 @@ router.get('/bankend/sweetCate/view', isAuthorize, bankendSweetCate.getItem)
 router.post('/bankend/sweetCate/update', isAuthorize, bankendSweetCate.modify)
 
 //分类删除单个
-router.get('/bankend/sweetCate/delete', isAuthorize, bankendSweetCate.deleteById)
+router.delete('/bankend/sweetCate/delete', isAuthorize, bankendSweetCate.deleteById)
+
+// 获取所有分类列表
+router.get('/bankend/sweetCate/all', isAuthorize, bankendSweetCate.getAll)
+
+
 
 // ---------------------------- 甜品信息 ------------------------
 
@@ -77,7 +86,7 @@ router.post('/bankend/sweetInfo/add', isAuthorize, bankendSweetInfo.create)
 router.post('/bankend/sweetInfo/update', isAuthorize, bankendSweetInfo.modify)
 
 // 甜品信息删除
-router.get('/bankend/sweetInfo/delete', isAuthorize, bankendSweetInfo.deleteById)
+router.delete('/bankend/sweetInfo/delete', isAuthorize, bankendSweetInfo.deleteById)
 
 // ------------------------------  推荐餐厅信息  ----------------------------
 
@@ -94,11 +103,18 @@ router.post('/bankend/shop/add', isAuthorize, bankendShop.insert)
 router.post('/bankend/shop/update', isAuthorize, bankendShop.modify)
 
 // 餐厅信息删除
-router.get('/bankend/shop/delete', isAuthorize, bankendShop.deleteById)
+router.delete('/bankend/shop/delete', isAuthorize, bankendShop.deleteById)
+
+
 /**
  * 前台 frontend
  * 
  */
+
+// =========================  轮播图  ===========================
+
+// 获取轮播图列表
+router.get('/frontend/carousel/list', frontendCarousel.list)
 
 
 module.exports = router
