@@ -13,7 +13,7 @@ dirs.filter(file => (file.indexOf('.') !== 0 && file !== 'index.js'))
     .forEach(file => {
         let model = sequelize.import(path.join(__dirname,'..','models/'+file))
         db[model.name] = model
-        model.sync({force:true})
+        model.sync(/*{force: true}*/)
     })
 
   //db.sweet_info.belongsTo(db.sweet_cate)

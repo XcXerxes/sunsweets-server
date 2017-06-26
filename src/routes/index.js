@@ -16,6 +16,7 @@ const mutiliUpload = require('../utils/uploader')
 
 //frontend
 const frontendCarousel = require('../api//frontend-carousel')
+const frontendUserMessage = require('../api/frontend-message')
 
 
 /**
@@ -115,6 +116,11 @@ router.delete('/bankend/shop/delete', isAuthorize, bankendShop.deleteById)
 
 // 获取轮播图列表
 router.get('/frontend/carousel/list', frontendCarousel.list)
+
+// ========================发送留言信息 =========================
+
+// 创建留言
+router.post('/frontend/message', frontendUserMessage.create)
 
 
 module.exports = router
