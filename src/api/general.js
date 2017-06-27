@@ -25,7 +25,7 @@ exports.item = (req, res, models) => {
   models.findById(id).then(result => {
     res.json({
       code: 200,
-      data: result
+      data: result || {}
     })
   }).catch(err => {
     res.json({

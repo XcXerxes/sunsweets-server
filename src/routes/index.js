@@ -17,6 +17,7 @@ const mutiliUpload = require('../utils/uploader')
 //frontend
 const frontendCarousel = require('../api//frontend-carousel')
 const frontendUserMessage = require('../api/frontend-message')
+const frontendSweetInfo = require('../api/frontend-sweetInfo')
 
 
 /**
@@ -78,7 +79,7 @@ router.get('/bankend/sweetCate/all', isAuthorize, bankendSweetCate.getAll)
 router.get('/bankend/sweetInfo/list', isAuthorize, bankendSweetInfo.getList)
 
 // 甜品信息查看
-router.get('/bankend/sweetInfo/view', isAuthorize, bankendSweetInfo.getItem)
+router.get('/bankend/sweetInfo/:id', isAuthorize, bankendSweetInfo.getItem)
 
 // 甜品信息添加
 router.post('/bankend/sweetInfo/add', isAuthorize, bankendSweetInfo.create)
@@ -95,16 +96,16 @@ router.delete('/bankend/sweetInfo/delete', isAuthorize, bankendSweetInfo.deleteB
 router.get('/bankend/shop/list', isAuthorize, bankendShop.getList)
 
 // 餐厅信息查看
-router.get('/bankend/shop/view', isAuthorize, bankendShop.getItem)
+router.get('/bankend/shop/:id', isAuthorize, bankendShop.getItem)
 
 // 餐厅信息添加
-router.post('/bankend/shop/add', isAuthorize, bankendShop.insert)
+router.post('/bankend/shop', isAuthorize, bankendShop.insert)
 
 // 餐厅信息更新
 router.post('/bankend/shop/update', isAuthorize, bankendShop.modify)
 
 // 餐厅信息删除
-router.delete('/bankend/shop/delete', isAuthorize, bankendShop.deleteById)
+router.delete('/bankend/shop/:id', isAuthorize, bankendShop.deleteById)
 
 
 /**
@@ -122,5 +123,7 @@ router.get('/frontend/carousel/list', frontendCarousel.list)
 // 创建留言
 router.post('/frontend/message', frontendUserMessage.create)
 
+// 获取当前甜品信息
+router.get('/frontend/sweetInfo/:id', frontendSweetInfo.item)
 
 module.exports = router

@@ -5,7 +5,6 @@ const moment = require('moment')
 const uuidV1 = require('uuid/v1')
 const assertError = require('../utils/asserts')
 
-models.shop.belongsTo(models.sweet_info)
 
 
 /**
@@ -22,14 +21,21 @@ exports.getList = (req, res) => {
  * insert
  */
 exports.insert = (req, res) =>{
-  const {id, name, sweet_id, address, level, imgGroup} = req.body
-  if(!id || !name || !sweet_id || !address || !level || !imgGroup){
+  const {name, thumb, sweetInfoId, caption, content, read, collection, address, level} = req.body
+  if(!name || !thumb || !sweetInfoId || !caption || !content || !level || !address){
     res.json(assertError('参数错误'))
   }
-  models.shop.create(Object.assign({}, req.body, {
-    createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
-    updatedAt: moment().format('YYYY-MM-DD HH:mm:ss')
-  })).then((result)=>{
+  models.shop.create({
+    name,
+    thumb,
+    sweetInfoId,
+    caption,
+    content,
+    level,
+    read,
+    collection,
+    address
+  }).then((result)=>{
     res.json({
       code:200,
       message:'添加成功',

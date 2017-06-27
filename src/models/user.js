@@ -8,11 +8,8 @@ module.exports = (sequelize, DataType) => {
             primaryKey: true
         },
         password: DataType.STRING(64),
-        role: DataType.STRING(32),
-        createdAt: DataType.DATE,
-        updatedAt: DataType.DATE
+        role: DataType.STRING(32)
     }, {
-            timestamps: false,
             //freezeTableName: true // Model 对应的表名将与model名相同
         })
     return User

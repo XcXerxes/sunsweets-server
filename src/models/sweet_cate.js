@@ -8,11 +8,7 @@ module.exports = (sequelize, DataType) => {
     title: DataType.STRING(64),
     sweet_order: DataType.INTEGER, //分类
     area: DataType.STRING,
-    createdAt: DataType.DATE,
-    updatedAt: DataType.DATE
   }, {
-      timestamps: false,
-      underscored: true,
        classMethods: {
         associate: function(models){
           console.log(models)

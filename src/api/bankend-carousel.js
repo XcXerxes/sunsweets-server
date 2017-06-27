@@ -27,8 +27,6 @@ exports.create = (req, res) => {
         title,
         img,
         caption,
-        createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
-        updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
     }).then((result) => {
         res.json({
             code: 200,

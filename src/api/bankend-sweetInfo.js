@@ -15,13 +15,11 @@ models.sweet_info.hasMany(models.shop)
 
 exports.create = (req, res) => {
   console.log(req.body)
-  const { title, thumb, caption, desc, sweet_cate_id, area, diff, shop_id } = req.body
-  if (!title || !thumb || !caption || !desc || !sweet_cate_id || !area || !diff || !shop_id) {
+  const { title, thumb, caption, desc, sweetCateId, area, diff, shop_id } = req.body
+  if (!title || !thumb || !caption || !desc || !sweetCateId || !area || !diff || !shop_id) {
     res.json(assertError('参数不对'))
   }
   models.sweet_info.create(Object.assign({}, req.body, {
-    createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
-    updatedAt: moment().format('YYYY-MM-DD HH:mm:ss'),
   })).then(result => {
     return res.json({
       code: 200,
@@ -72,15 +70,17 @@ exports.getList = (req, res) => {
   let { limit, currentPage, sort } = req.query
   const sortName = (sort && sort.split('-')[0]) || 'id'
   const sortType = (sort && sort.split('-')[1]) || 'asc'
-  limit = parseInt(limit, 10) || 1
-  currentPage = parseInt(currentPage, 10) || 10
-
+  limit = parseInt(limit, 10) || 10
+  currentPage = parseInt(currentPage, 10) || 1
+  console.log(currentPage+'======'+limit)
   const offset = (currentPage - 1) * limit
   models.sweet_info.findAndCountAll({
     offset,
     limit,
     order: `${sortName} ${sortType}`,
-    include:[models.sweet_cate]
+    include:[{
+      model: models.sweet_cate,
+    }]
   }).then(result => {
     const { count, rows } = result
     const totalPage = Math.ceil(count / limit)

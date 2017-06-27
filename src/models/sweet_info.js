@@ -12,23 +12,18 @@ module.exports = (sequelize, DataType) => {
     read: {
       type: DataType.INTEGER,
       defaultValue: 0
-    }, // 查看次数
+    }, // 浏览次数
     collection: {
       type: DataType.INTEGER,
       defaultValue: 0
     }, // 收藏
-    sweet_cate_id: {
+    sweetCateId: {
       type: DataType.UUID,
       allowNull: false
     }, // 分类
     area: DataType.STRING,   // 地区
     diff: DataType.INTEGER,  // 操作难度
-    shop_id: DataType.STRING, //餐厅
-    createdAt: DataType.DATE,
-    updatedAt: DataType.DATE
   }, {
-      timestamps: false,
-      underscored: true,
       classMethods: {
         associate: function (models) {
           console.log(models.sweet_cate)
