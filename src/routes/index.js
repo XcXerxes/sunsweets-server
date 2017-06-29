@@ -123,7 +123,11 @@ router.get('/frontend/carousel/list', frontendCarousel.list)
 // 创建留言
 router.post('/frontend/message', frontendUserMessage.create)
 
+// =========================  甜品信息 ================
+
+// 获取甜品信息列表
+router.get('/frontend/sweetShow/list', frontendSweetInfo.list)
 // 获取当前甜品信息
-router.get('/frontend/sweetInfo/:id', frontendSweetInfo.item)
+router.get('/frontend/sweetShow/:id', frontendSweetInfo.item)
 
 module.exports = router

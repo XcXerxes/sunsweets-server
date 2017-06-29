@@ -16,11 +16,25 @@ const fileExistsSync = (path) => {
 // 创建 secret.json
 
 exports.createSecret = () => {
-    var filePath = path.join(__dirname,'../../', 'src/config/superSecret.json')
+    var filePath = path.join(__dirname, '../../', 'src/config/superSecret.json')
     if (!fileExistsSync(filePath)) {
         const secret = {
             superSecret: Math.random() * 1000000
         }
         fs.writeFileSync(filePath, JSON.stringify(secret), 'utf8')
     }
-} 
+}
+
+// limit and currentPage 
+exports.parsePagination = ({ limit, currentPage, sort }) => {
+    const sortName = (sort && sort.split('-')[0]) || 'createdAt'
+    const sortType = (sort && sort.split('-')[1]) || 'asc'
+    limit = parseInt(limit, 10) || 5
+    currentPage = parseInt(currentPage, 10) || 1
+    const offset = (currentPage - 1) * limit
+    return {
+        limit,
+        offset,
+        order:`${sortName} ${sortType}`
+    }
+}

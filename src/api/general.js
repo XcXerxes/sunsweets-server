@@ -3,6 +3,7 @@
  * @methods  create
  */
 const moment = require('moment')
+const utils = require('../utils')
 /*exports.create = (req, res, models) =>{
 
 }*/
@@ -46,17 +47,8 @@ exports.item = (req, res, models) => {
 
 exports.list = (req, res, models) => {
   let {limit,currentPage,sort} = req.query
-  const sortName = (sort && sort.split('-')[0]) ||'createdAt'
-  const sortType = (sort && sort.split('-')[1]) ||'asc'
-  limit = parseInt(limit,10) || 5
-  currentPage = parseInt(currentPage,10) || 1
-  
-  const offset = (currentPage - 1) * limit
-  models.findAndCountAll({
-    offset,
-    limit,
-    order:`${sortName} ${sortType}`
-  }).then(result => {
+  const params = utils.parsePagination({limit,currentPage,sort})
+  models.findAndCountAll(params).then(result => {
     const {count,rows} = result
     const totalPage = Math.ceil(count / limit)
     console.log(result)
