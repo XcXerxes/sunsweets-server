@@ -18,6 +18,7 @@ const mutiliUpload = require('../utils/uploader')
 const frontendCarousel = require('../api//frontend-carousel')
 const frontendUserMessage = require('../api/frontend-message')
 const frontendSweetInfo = require('../api/frontend-sweetInfo')
+const frontendSweetCate = require('../api/frontend-sweetCate')
 
 
 /**
@@ -129,5 +130,8 @@ router.post('/frontend/message', frontendUserMessage.create)
 router.get('/frontend/sweetShow/list', frontendSweetInfo.list)
 // 获取当前甜品信息
 router.get('/frontend/sweetShow/:id', frontendSweetInfo.item)
+
+// ======================== 分类信息 ========================
+router.get('/frontend/sweetCate/all', frontendSweetCate.getAll)
 
 module.exports = router
