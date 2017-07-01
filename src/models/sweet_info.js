@@ -9,7 +9,7 @@ module.exports = (sequelize, DataType) => {
     thumb: DataType.STRING, // 缩略图
     caption: DataType.TEXT, // 简要说明
     desc: DataType.TEXT,   // 具体的内容
-    read: {
+    reading: {
       type: DataType.INTEGER,
       defaultValue: 0
     }, // 浏览次数

@@ -15,7 +15,7 @@ models.sweet_info.hasMany(models.shop)
 
 exports.create = (req, res) => {
   console.log(req.body)
-  const { title, thumb, caption, desc, sweetCateId, area, diff, shop_id } = req.body
+  const { title, thumb, caption, desc, sweetCateId, area, diff} = req.body
   if (!title || !thumb || !caption || !desc || !sweetCateId || !area || !diff) {
     return res.json(assertError('参数不对'))
   }
