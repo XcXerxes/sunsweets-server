@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken')
 const superSecret = require('../config/superSecret.json')['superSecret']
 
 module.exports = (req, res, next) => {
-  const sun_token = req.body.token || req.param('token') || req.headers['sweet-token']
+  const sun_token = req.body.token || req.param['token'] || req.headers['sweet-token']
   if (sun_token) {
     jwt.verify(sun_token, superSecret.toString(), (err, decoded) => {
       if (!err) {

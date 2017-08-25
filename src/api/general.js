@@ -127,7 +127,6 @@ exports.updateData = (req,res,models) =>{
     })
   }
   models.update(Object.assign({},req.body,{
-    createdAt: moment(createdAt).format('YYYY-MM-DD HH:mm:ss'),
     updatedAt: moment().format('YYYY-MM-DD HH:mm:ss')
   }), {
     where:{
